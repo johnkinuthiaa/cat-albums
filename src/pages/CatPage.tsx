@@ -1,12 +1,14 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 
 const CatPage =()=>{
-    const [albumImage,setAlbumImage] =useState<string>("https://i.scdn.co/image/ab67616d000048512719343298d0e4f1790e14cd")
+    const [albumImage,setAlbumImage] =useState<string>("https://i.scdn.co/image/ab67616d0000b2732719343298d0e4f1790e14cd")
     const [message,setMessage] =useState<string>("")
     const[catImage,setCatImage]=useState<string>("src/assets/cat2.png")
     const[searchTerm,setSearchTerm] =useState<string>("")
 
+    const CLIENT_ID=import.meta.env.VITE_SPOTIFY_CLIENT
+    const SECRET_ID=import.meta.env.VITE_SPOTIFY_SECRET
     const[accessToken,setAccessToken]=useState<string>("")
 
     const ENDPOINT =`https://api.spotify.com/v1/search?q=${searchTerm}&type=album&limit=1`
@@ -41,10 +43,12 @@ const CatPage =()=>{
                 setAlbumImage(image)
             }
             else{
-                setMessage("Error fetching your image")
+                await authenticate()
+
             }
 
         }catch (e) {
+            setMessage("Error fetching your image")
             throw new Error("Error"+e)
         }
 
@@ -56,7 +60,7 @@ const CatPage =()=>{
         const response =await fetch("https://accounts.spotify.com/api/token",{
             method:"POST",
             headers:myHeaders,
-            body:"grant_type=client_credentials&client_id=6877a5de0c674752aa5c5487c24874bf&client_secret=fd40d9c4499b42489ec96a566203eb5c"
+            body:`grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${SECRET_ID}`
         })
         if(response.ok){
             const data =await response.json()
@@ -84,17 +88,19 @@ const CatPage =()=>{
                     Search
                 </button>
             </div>
-            {/*<img src={catImage} alt={"cat image"} className={"cat__image h-[350px] w-[350px]"} />*/}
-            {/*<img src={albumImage} alt={"album image"} style={{*/}
-            {/*    position:"absolute",*/}
-            {/*    zIndex:"-9999",*/}
-            {/*    marginTop:"233px",*/}
-            {/*    height:"184px",*/}
-            {/*    width:"183px",*/}
-            {/*    objectFit:"cover",*/}
-            {/*    marginLeft:"7px"*/}
+            <div className={"relative flex flex-col items-center"}>
+                <img src={catImage} alt={"cat image"} className={"cat__image h-[350px] w-[350px]"} />
+                <img src={albumImage} alt={"album image"} style={{
+                    position:"absolute",
+                    zIndex:"-9999",
+                    marginTop:"179px",
+                    height:"184px",
+                    width:"183px",
+                    objectFit:"cover",
+                    marginLeft:"7px"
 
-            {/*}} className={"album__image"}/>*/}
+                }} className={"album__image"}/>
+            </div>
             <div className={"choices"}>
                 <div onClick={()=>{
                     setCatImage("src/assets/cat2.png")
