@@ -1,7 +1,8 @@
 import {useState} from "react";
 
+
 const CatPage =()=>{
-    const [albumImage,setAlbumImage] =useState<string>("https://i.pinimg.com/474x/50/f4/f2/50f4f2d561d1e60f462f47182ff5bba5.jpg")
+    const [albumImage,setAlbumImage] =useState<string>("https://i.scdn.co/image/ab67616d000048512719343298d0e4f1790e14cd")
     const [message,setMessage] =useState<string>("")
     const[catImage,setCatImage]=useState<string>("src/assets/cat2.png")
     const[searchTerm,setSearchTerm] =useState<string>("")
@@ -20,10 +21,9 @@ const CatPage =()=>{
             })
             if(response.ok){
                 const data =await response.json()
-                // @ts-expect-error
                 if(data?.results.albummatches !=0){
-                    // console.log(data.results.albummatches.album[0].image[0])
-                    setAlbumImage(data.results.albummatches.album[0].image[0].text)
+                    console.log()
+                    setAlbumImage(data.results.albummatches.album[0].image[2]["#text"])
                 }else{
                     setMessage("no album with the name"+ searchTerm+" found")
                 }
@@ -41,17 +41,29 @@ const CatPage =()=>{
         <div className={"cat__image__holder"}>
             <p className={"text-red-600"}>{message}</p>
             <div className={"flex align-center gap-1"}>
-                <input className={"bg-[whitesmoke] rounded-2xl"} type={"search"} placeholder={"search for an album"} required={true} onChange={(e)=>{
+                <input className={"search"} type={"search"} placeholder={"search for an album"} required={true} onChange={(e)=>{
                     setSearchTerm(e.target.value)
                 }}/>
                 <button style={{backgroundColor:"rgb(255, 75, 145)",padding:"10px", borderRadius:"10px",color:"white",marginBottom:"10px",cursor:"pointer"}}
-                        onClick={()=>fetchAlbumImage()}
+                        onClick={()=> {
+                            fetchAlbumImage()
+                            setSearchTerm("")
+                        }}
                 >
                     Search
                 </button>
             </div>
-            <img src={catImage} alt={"cat image"} className={"flex align-center justify-center"}/>
-            <img src={albumImage} alt={"album image"} className={"w-[200px] h-[200px] top-[400px] left-[320px] rounded-xl z-[-9999] fill"}/>
+            <img src={catImage} alt={"cat image"} className={"cat__image h-[350px] w-[350px]"} />
+            <img src={albumImage} alt={"album image"} style={{
+                position:"absolute",
+                zIndex:"-9999",
+                marginTop:"232px",
+                height:"184px",
+                width:"183px",
+                objectFit:"fill",
+                marginLeft:"7px"
+
+            }} className={"album__image"}/>
             <div className={"choices"}>
                 <div onClick={()=>{
                     setCatImage("src/assets/cat2.png")
@@ -72,7 +84,6 @@ const CatPage =()=>{
                     <p>Pink shades</p>
                 </div>
             </div>
-            <canvas></canvas>
 
         </div>
     )
