@@ -94,10 +94,10 @@ const CatPage =()=>{
         <div className={"cat__image__holder"}>
             <p className={"text-red-600"}>{message}</p>
             <div className={"flex align-center gap-1"}>
-                <input className={"search"} type={"search"} placeholder={"search for an album"} required={true} onChange={(e)=>{
+                <input className={"search"} type={"search"} placeholder={"search for an album or artist..."} required={true} onChange={(e)=>{
                     setSearchTerm(e.target.value)
                 }}/>
-                <button style={{backgroundColor:"rgb(255, 75, 145)",padding:"10px", borderRadius:"10px",color:"white",marginBottom:"10px",cursor:"pointer"}}
+                <button type={"submit"} style={{backgroundColor:"rgb(255, 75, 145)",padding:"10px", borderRadius:"10px",color:"white",marginBottom:"10px",cursor:"pointer"}}
                         onClick={()=> {
                             fetchAlbumImage()
                         }}
