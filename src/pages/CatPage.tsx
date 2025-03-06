@@ -116,10 +116,12 @@ const CatPage =()=>{
                     marginLeft:"7px"
                 }} className={"album__image"}/>
             </div>
-            <button className={"bg-yellow-500 rounded-2px p-4 cursor-pointer mt-4"} onClick={(e)=>{
+            <h4>Download</h4>
+            <button className={"download bg-yellow-500 rounded-xl cursor-pointer"} onClick={(e)=>{
                 e.preventDefault()
                 download()
             }}><DownloadIcon/></button>
+
             <div className={"choices"}>
                 <div onClick={()=>{
                     setCatImage("src/assets/cat2.png")

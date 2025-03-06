@@ -41,6 +41,9 @@ input[type="search"]{
 .cat__image{
   margin-top: 20px;
 }
+.download{
+  padding: 5px;
+}
 @media screen and (max-width: 768px){
   .choices>div>img{
     height: 150px;
