@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -41,4 +40,25 @@ input[type="search"]{
 }
 .cat__image{
   margin-top: 20px;
+}
+@media screen and (max-width: 768px){
+  .choices>div>img{
+    height: 150px;
+    width:150px
+  }
+  .app{
+    margin:0 auto;
+    width: 100%;
+    padding: 5px;
+  }
+  .header{
+    margin-top: 10px;
+  }
+  :root{
+    margin-top: -5px;
+
+  }
+  .cat__image__holder{
+    margin-top: 50px;
+  }
 }

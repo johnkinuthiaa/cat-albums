@@ -19,7 +19,7 @@ const Header =()=>{
         color:theme==="light"?"black":"white"
     }
     return (
-        <div className={"flex justify-between align-center mt-2 "} style={{marginTop:"50px"}}>
+        <div className={"header flex justify-between align-center mt-2 "} style={{marginTop:"50px"}}>
             <h1 className={"text-black text-2xl"} style={heading}>Cat <span className={"text-pink-400"}>albums</span></h1>
             <button className={`${theme==="light"?"text-gold-900":"text-gold-900"} cursor-pointer p-2 rounded-2xl`}
                     onClick={()=>setTheme(theme==="light"?"dark":"light")}

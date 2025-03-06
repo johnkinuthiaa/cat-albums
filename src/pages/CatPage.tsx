@@ -1,6 +1,6 @@
-import {useEffect, useRef, useState} from "react";
-
-
+import {useEffect,useState} from "react";
+import domtoimage from 'dom-to-image';
+import DownloadIcon from '@mui/icons-material/Download';
 const CatPage =()=>{
     const [albumImage,setAlbumImage] =useState<string>("https://i.scdn.co/image/ab67616d0000b2732719343298d0e4f1790e14cd")
     const [message,setMessage] =useState<string>("")
@@ -73,6 +73,16 @@ const CatPage =()=>{
             }
         }
     })
+    const download =()=>{
+        domtoimage.toJpeg(document.getElementById('album_image'), { quality: 1 })
+            .then(function (dataUrl:string) {
+                const link = document.createElement('a');
+                link.download = `cat-${searchTerm}.jpeg`;
+                link.href = dataUrl;
+                link.click();
+            });
+    }
+
     return(
         <div className={"cat__image__holder"}>
             <p className={"text-red-600"}>{message}</p>
@@ -88,7 +98,7 @@ const CatPage =()=>{
                     Search
                 </button>
             </div>
-            <div className={"relative flex flex-col items-center"}>
+            <div className={"relative flex flex-col items-center"} id={"album_image"}>
                 <img src={catImage} alt={"cat image"} className={"cat__image h-[350px] w-[350px]"} />
                 <img src={albumImage} alt={"album image"} style={{
                     position:"absolute",
@@ -98,9 +108,12 @@ const CatPage =()=>{
                     width:"183px",
                     objectFit:"cover",
                     marginLeft:"7px"
-
                 }} className={"album__image"}/>
             </div>
+            <button className={"bg-yellow-500 rounded-2px p-4 cursor-pointer mt-4"} onClick={(e)=>{
+                e.preventDefault()
+                download()
+            }}><DownloadIcon/></button>
             <div className={"choices"}>
                 <div onClick={()=>{
                     setCatImage("src/assets/cat2.png")

@@ -7,7 +7,7 @@ function App() {
     }
 
   return (
-    <div className={"font-bold flex flex-col align-center justify-center w-[50%] "} style={appStyle}>
+    <div className={"app font-bold flex flex-col align-center justify-center w-[50%] "} style={appStyle}>
         <Header/>
         <CatPage/>
         <footer className={"fixed top-220 text-center align-center flex items-center"}> made with ❤️ by &copy; <a href={"https://github.com/johnkinuthiaa"}>sli</a></footer>
