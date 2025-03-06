@@ -74,13 +74,19 @@ const CatPage =()=>{
         }
     })
     const download =()=>{
-        domtoimage.toJpeg(document.getElementById('album_image'), { quality: 1 })
-            .then(function (dataUrl:string) {
-                const link = document.createElement('a');
-                link.download = `cat-${searchTerm}.jpeg`;
-                link.href = dataUrl;
-                link.click();
-            });
+        const image =document.getElementById('album_image')
+        if(image !==null){
+            domtoimage.toJpeg(image, { quality: 1 })
+                .then(function (dataUrl:string) {
+                    const link = document.createElement('a');
+                    link.download = `cat-${searchTerm}.jpeg`;
+                    link.href = dataUrl;
+                    link.click();
+                });
+        }else{
+            setMessage("Image not found")
+        }
+
     }
 
     return(
