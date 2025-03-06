@@ -1,10 +1,11 @@
 import {useEffect,useState} from "react";
+
 import domtoimage from 'dom-to-image';
 import DownloadIcon from '@mui/icons-material/Download';
 const CatPage =()=>{
     const [albumImage,setAlbumImage] =useState<string>("https://i.scdn.co/image/ab67616d0000b2732719343298d0e4f1790e14cd")
     const [message,setMessage] =useState<string>("")
-    const[catImage,setCatImage]=useState<string>("src/assets/cat2.png")
+    const[catImage,setCatImage]=useState<string>("/cat2.png")
     const[searchTerm,setSearchTerm] =useState<string>("")
 
     const CLIENT_ID=import.meta.env.VITE_SPOTIFY_CLIENT
@@ -124,21 +125,21 @@ const CatPage =()=>{
 
             <div className={"choices"}>
                 <div onClick={()=>{
-                    setCatImage("src/assets/cat2.png")
+                    setCatImage("/cat2.png")
                 }}>
-                    <img src={"src/assets/cat2.png"} alt={"with no shades"}/>
+                    <img src={"cat2.png"} alt={"with no shades"}/>
                     <p>No shades</p>
                 </div>
                 <div onClick={()=>{
-                    setCatImage("src/assets/cat3.png")
+                    setCatImage("/cat3.png")
                 }}>
-                    <img src={"src/assets/cat3.png"} alt={"with black shades"}/>
+                    <img src={"/cat3.png"} alt={"with black shades"}/>
                     <p>Black shades</p>
                 </div>
                 <div onClick={()=>{
-                    setCatImage("src/assets/cat4.png")
+                    setCatImage("/cat4.png")
                 }}>
-                    <img src={"src/assets/cat4.png"} alt={"with rockstar shades"}/>
+                    <img src={"/cat4.png"} alt={"with rockstar shades"}/>
                     <p>Pink shades</p>
                 </div>
             </div>
